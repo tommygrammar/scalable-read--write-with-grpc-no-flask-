@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package readservice;
+
+// The service definition
+service ReadService {
+  rpc ReadData (ReadRequest) returns (ReadResponse) {}
+}
+
+// The request message containing collection, document, and field details
+message ReadRequest {
+  string collection = 1;
+  string document = 2;
+  string field = 3;
+}
+
+// The response message structure
+message ReadResponse {
+  map<string, CollectionData> collections = 1;
+  string error = 2;
+}
+
+message CollectionData {
+  map<string, DocumentData> documents = 1;
+}
+
+message DocumentData {
+  map<string, string> fields = 1;
+}
